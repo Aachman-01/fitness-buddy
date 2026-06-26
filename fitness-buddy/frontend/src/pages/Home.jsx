@@ -57,7 +57,7 @@ const generatePlan = async (e) => {
   setResult("");
 
   try {
-    const response = await fetch("http://localhost:5000/api/fitness/generate", {
+    const response = await fetch("https://fitness-buddy-hylk.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
