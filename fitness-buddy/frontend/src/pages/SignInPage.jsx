@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -29,16 +29,45 @@ export default function SignInPage() {
   }, [searchParams]);
 
   const [mode, setMode] = useState(initialMode);
+  const [notice, setNotice] = useState(null);
 
   useEffect(() => {
     setMode(searchParams.get("mode") === "signup" ? "signup" : "signin");
   }, [searchParams]);
+
+  useEffect(() => {
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(null), 2600);
+    return () => clearTimeout(timer);
+  }, [notice]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setNotice(mode === "signin" ? "Successfully logged in" : "Successfully registered");
+  };
 
   return (
     <div className="auth-page premium-page">
       <div className="auth-orb auth-orb-one" />
       <div className="auth-orb auth-orb-two" />
       <div className="auth-gridline" />
+
+      <AnimatePresence>
+        {notice && (
+          <motion.div
+            className="top-notice"
+            initial={{ opacity: 0, y: -18, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -14, scale: 0.98 }}
+            transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
+            role="status"
+            aria-live="polite"
+          >
+            <span className="top-notice-dot" />
+            <strong>{notice}</strong>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.main
         className="auth-shell premium-auth-shell"
@@ -96,7 +125,7 @@ export default function SignInPage() {
           </div>
 
           {mode === "signin" ? (
-            <form className="auth-form premium-auth-form">
+            <form className="auth-form premium-auth-form" onSubmit={handleSubmit}>
               <div className="form-heading-wrap">
                 <p className="section-kicker">Account access</p>
                 <h2>Sign In</h2>
@@ -120,7 +149,7 @@ export default function SignInPage() {
               </p>
             </form>
           ) : (
-            <form className="auth-form premium-auth-form">
+            <form className="auth-form premium-auth-form" onSubmit={handleSubmit}>
               <div className="form-heading-wrap">
                 <p className="section-kicker">New membership</p>
                 <h2>Sign Up</h2>
