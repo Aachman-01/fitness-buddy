@@ -57,12 +57,14 @@ const generatePlan = async (e) => {
   setResult("");
 
   try {
-    const response = await fetch("https://fitness-buddy-hylk.onrender.com", {
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    const response = await fetch(`${API_URL}/api/fitness/generate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
+        body: JSON.stringify({
         message: prompt.trim(),
       }),
     });
