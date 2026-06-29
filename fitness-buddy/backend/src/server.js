@@ -38,7 +38,7 @@ async function getIamToken() {
 app.post("/api/fitness/generate", async (req, res) => {
   try {
     const {
-      message = "Create a beginner 20-minute home workout, one healthy meal idea, one motivational line, and one habit goal.",
+      message = "Create a beginner 20-minute home workout, one healthy meal idea, one motivational line, and one habit goal."
     } = req.body;
 
     const token = await getIamToken();
@@ -47,20 +47,16 @@ app.post("/api/fitness/generate", async (req, res) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        "Accept": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({
         messages: [
           {
-            role: "system",
-            content: `You are Fitness Buddy, a friendly fitness and wellness coach. Keep responses concise, practical, safe, and easy to read. Suggest only two options unless the user asks for more.`,
-          },
-          {
             role: "user",
-            content: message,
-          },
-        ],
+            content: message
+          }
+        ]
       }),
     });
 
@@ -73,7 +69,7 @@ app.post("/api/fitness/generate", async (req, res) => {
 
     res.json({
       success: true,
-      reply: data?.choices?.[0]?.message?.content || "No response generated.",
+      reply: data?.choices?.[0]?.message?.content || "No response generated."
     });
   } catch (error) {
     console.error(error);
