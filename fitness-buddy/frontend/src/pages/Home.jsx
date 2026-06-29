@@ -57,17 +57,17 @@ const generatePlan = async (e) => {
   setResult("");
 
   try {
-    const API_URL = import.meta.env.VITE_API_URL;
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-    const response = await fetch(`${API_URL}/api/fitness/generate`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-        body: JSON.stringify({
-        message: prompt.trim(),
-      }),
-    });
+const response = await fetch(`${API_URL}/api/fitness/generate`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    message: prompt.trim(),
+  }),
+});
 
     const data = await response.json();
 
