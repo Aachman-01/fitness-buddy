@@ -70,53 +70,8 @@ This makes Fitness Buddy a proactive and personalized digital fitness coach.
 
 ---
 
-## 🔁 Langflow Components Used
 
-The Langflow workflow includes the following components:
 
-1. **Chat Input** – Takes user fitness queries and profile details.
-2. **Prompt Template** – Converts user inputs into a structured AI prompt.
-3. **Conditional Router** – Routes requests based on user intent such as workout, nutrition, or motivation.
-4. **IBM watsonx.ai / Granite Model** – Generates personalized fitness and wellness responses.
-5. **Output Parser** – Formats the AI response into clean sections.
-6. **Chat Output** – Displays the final result to the user.
-7. **Memory / File Component** – Stores user preferences, habits, and previous interaction data.
-
----
-
-## 🏗️ Architecture Blueprint
-
-The architecture of Fitness Buddy follows a layered structure:
-
-1. **User Interface Layer**
-   - React-based chat interface
-   - User profile form
-   - Suggestion cards
-   - Habit tracking dashboard
-
-2. **Backend Layer**
-   - Node.js / Express API
-   - Handles user requests
-   - Sends structured prompts to Langflow
-   - Manages response flow
-
-3. **Langflow Orchestration Layer**
-   - Routes user queries
-   - Builds prompts
-   - Manages workflow between components
-
-4. **AI Layer**
-   - IBM watsonx.ai
-   - IBM Granite model
-   - Generates personalized recommendations
-
-5. **Data Layer**
-   - Stores user preferences
-   - Tracks daily habits
-   - Maintains chat/session history
-
-6. **Cloud Layer**
-   - IBM Cloud Lite services for deployment and AI integration
 
 ### Architecture Flow
 
