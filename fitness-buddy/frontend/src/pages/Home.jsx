@@ -24,6 +24,13 @@ const fadeUp = {
   }),
 };
 
+function refineReply(raw) {
+  if (!raw) return "";
+  return raw
+    .replace(/^(\s*)[•·▪◦]\s+/gm, "$1- ")
+    .replace(/^\s*\*\*(.+?):?\*\*:?\s*$/gm, "### $1");
+}
+
 export default function Home() {
   const [theme, setTheme] = useState("dark");
   const [prompt, setPrompt] = useState("");
@@ -261,7 +268,7 @@ const response = await fetch(`${API_URL}/api/fitness/generate`, {
 
             {result ? (
               <div className="result-box markdown-body">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{result}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{refineReply(result)}</ReactMarkdown>
               </div>
             ) : (
               <div className="empty-state">
