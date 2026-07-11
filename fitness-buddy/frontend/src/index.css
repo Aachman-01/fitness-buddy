@@ -1191,3 +1191,59 @@ p {
     font-size: 0.9rem;
   }
 }
+/* Rendered markdown inside the result panel */
+.result-box.markdown-body {
+  white-space: normal;
+}
+.result-box.markdown-body > :first-child {
+  margin-top: 0;
+}
+.result-box.markdown-body > :last-child {
+  margin-bottom: 0;
+}
+.result-box.markdown-body h1,
+.result-box.markdown-body h2,
+.result-box.markdown-body h3,
+.result-box.markdown-body h4 {
+  margin: 18px 0 8px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.result-box.markdown-body h1 {
+  font-size: 1.35rem;
+}
+.result-box.markdown-body h2 {
+  font-size: 1.15rem;
+}
+.result-box.markdown-body h3 {
+  font-size: 1.02rem;
+}
+.result-box.markdown-body p {
+  margin: 8px 0;
+}
+.result-box.markdown-body ul,
+.result-box.markdown-body ol {
+  margin: 8px 0;
+  padding-left: 22px;
+}
+.result-box.markdown-body li {
+  margin: 4px 0;
+}
+.result-box.markdown-body strong {
+  color: inherit;
+  font-weight: 700;
+}
+.result-box.markdown-body code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.theme-light .result-box.markdown-body code {
+  background: rgba(15, 23, 42, 0.06);
+}
+.result-box.markdown-body a {
+  color: #7cc4ff;
+  text-decoration: underline;
+}

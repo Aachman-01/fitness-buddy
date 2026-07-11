@@ -23,7 +23,7 @@ const IAM_TOKEN_URL =
 // Set the full URL via WATSONX_CHAT_URL, or let it be built from the region
 // host + deployment id + API version below.
 const DEPLOYMENT_ID =
-  process.env.WATSONX_DEPLOYMENT_ID || "019f0f4e-1293-7088-a645-3f464b172c1e";
+  process.env.WATSONX_DEPLOYMENT_ID || "019f4bed-f92a-73b4-9eb9-cf5dc68c6939";
 const WATSONX_REGION_HOST =
   process.env.WATSONX_REGION_HOST || "au-syd.ml.cloud.ibm.com";
 const WATSONX_VERSION = process.env.WATSONX_VERSION || "2021-05-01";

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const quickPrompts = [
   "Create a 5-day fat loss workout plan with home equipment",
@@ -57,7 +59,14 @@ const generatePlan = async (e) => {
   setResult("");
 
   try {
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    const rawApiUrl = (import.meta.env.VITE_API_URL || "http://localhost:5000")
+      .trim()
+      .replace(/\/+$/, "");
+    // Ensure the base URL always includes a scheme. Without it the browser
+    // reads "localhost:5000" as an unsupported URL scheme and the fetch fails.
+    const API_URL = /^https?:\/\//i.test(rawApiUrl)
+      ? rawApiUrl
+      : `http://${rawApiUrl}`;
 
 const response = await fetch(`${API_URL}/api/fitness/generate`, {
   method: "POST",
@@ -251,7 +260,9 @@ const response = await fetch(`${API_URL}/api/fitness/generate`, {
             </div>
 
             {result ? (
-              <pre className="result-box">{result}</pre>
+              <div className="result-box markdown-body">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{result}</ReactMarkdown>
+              </div>
             ) : (
               <div className="empty-state">
                 <div className="pulse-ring">
