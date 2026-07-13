@@ -1782,3 +1782,98 @@ p,
     position: static;
   }
 }
+
+/* ===================== Motion smoothness refinement ===================== */
+:root {
+  --dur: 0.5s;
+  --dur-fast: 0.32s;
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-silky: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Smooth transitions for interactive elements that previously snapped */
+.auth-tab,
+.text-link,
+.back-home,
+.feature-dot,
+.brand-mark,
+.brand-mark span,
+.toggle-track,
+.value-item,
+.metric-card,
+.copy-footer-card,
+.feature-line,
+.top-notice,
+.auth-switch button,
+a {
+  transition:
+    transform var(--dur) var(--ease-premium),
+    box-shadow var(--dur) var(--ease-premium),
+    border-color var(--dur) var(--ease-premium),
+    background var(--dur) var(--ease-premium),
+    color var(--dur) var(--ease-premium),
+    opacity var(--dur) var(--ease-premium);
+}
+
+/* Smooth hover lift on smaller cards */
+.value-item:hover,
+.metric-card:hover,
+.copy-footer-card:hover,
+.feature-line:hover {
+  transform: translateY(-4px);
+  border-color: rgba(94, 234, 212, 0.26);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(94, 234, 212, 0.08);
+}
+
+.auth-tab {
+  will-change: transform, color;
+}
+.auth-tab:hover {
+  color: var(--text);
+}
+
+.brand-mark:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+.brand-mark:hover span {
+  transform: rotate(215deg);
+}
+
+.toggle-track:hover {
+  border-color: rgba(94, 234, 212, 0.3);
+}
+
+.text-link:hover,
+.back-home:hover,
+.auth-switch button:hover {
+  color: var(--primary);
+}
+
+/* Gentler, longer pulse for a calmer glow */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.34);
+  }
+  70% {
+    box-shadow: 0 0 0 22px rgba(94, 234, 212, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(94, 234, 212, 0);
+  }
+}
+
+.pulse-ring div {
+  animation: pulse 3s ease-out infinite;
+}
+
+.result-box.markdown-body {
+  transition: opacity var(--dur) var(--ease-premium);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-one,
+  .ambient-two,
+  .pulse-ring div {
+    animation: none !important;
+  }
+}
